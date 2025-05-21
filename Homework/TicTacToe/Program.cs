@@ -1,44 +1,41 @@
-﻿namespace TicTacToe;
+﻿using System;
+
+namespace TicTacToe;
 
 class Program
 {
-    public enum GameResult
-    {
-        CrossWin,
-        CircleWin,
-        Draw
-    }
-    
+    const string CIRCLE = "O";
+    const string CROSS = "X";
     static void Main()
     {
-        var flag = false;
+        var isCircleTurn = false;
         var field = new string[3, 3] { { "1", "2", "3" }, { "4", "5", "6" }, { "7", "8", "9" } };
-        var turnCounter = 0;
+        var gameResult = GetGameResult(CROSS, field);
         
-        while (true)
+        for (var i = 0; i < 9; i++)
         {
-            var playerSign = flag ? "O" : "X";
+            var playerSign = isCircleTurn ? CIRCLE : CROSS;
             
             PrintField(field);
             Console.Write("\nХод " + playerSign + ": ");
             
             var turn = Console.ReadLine();
-            
+
             if (!CorrectTurn(turn, field, playerSign))
-                Console.Write("Неверный ход\n");
-            else
             {
-                flag = !flag;
-                turnCounter++;
-                var gameResult = GetGameResult(playerSign, field);
-                if (gameResult != GameResult.Draw || turnCounter == 9)
-                {
-                    PrintField(field);
-                    Console.WriteLine(gameResult);
-                    break;
-                }
+                Console.Write("Неверный ход\n");
+                continue;
+            }
+            isCircleTurn = !isCircleTurn;
+            gameResult = GetGameResult(playerSign, field);
+            if (gameResult != GameResult.Draw)
+            {
+                PrintField(field);
+                break;
             }
         }
+        
+        Console.WriteLine(gameResult);
     }
     
     public static void PrintField(string[,] field)
@@ -52,9 +49,9 @@ class Program
             for (var j = 0; j < col; j++)
             {
                 Console.Write("| ");
-                if (field[i, j] == "O")
+                if (field[i, j] == CIRCLE)
                     Console.BackgroundColor = ConsoleColor.Blue;
-                else if (field[i, j] == "X")
+                else if (field[i, j] == CROSS)
                     Console.BackgroundColor = ConsoleColor.Red;
             
                 Console.Write(field[i, j]);
@@ -86,9 +83,9 @@ class Program
 
     public static GameResult GetGameResult(string turn, string[,] field)
     {
-        if (HasWinSequence(field, turn) && turn == "X") 
+        if (HasWinSequence(field, turn) && turn == CROSS) 
             return GameResult.CrossWin;
-        if (HasWinSequence(field, turn) && turn == "O") 
+        if (HasWinSequence(field, turn) && turn == CIRCLE) 
             return GameResult.CircleWin;
         
         return GameResult.Draw;
