@@ -1,12 +1,35 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Homework3", "Homework3", "{C79DFA2D-26A2-4C93-8335-764FBC7B9DDE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhonebookCLI", "PhonebookCLI\PhonebookCLI.csproj", "{ECCF7D71-3082-409A-AAD2-3BFAC3CD74EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhonebookManagement", "PhonebookManagement\PhonebookManagement.csproj", "{8CBD678F-7006-4DD3-BB43-D27CDC9E6A64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbonentLibrary", "AbonentLibrary\AbonentLibrary.csproj", "{98CC8CBC-B9CA-447D-8B04-F572DBE3FB5C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ECCF7D71-3082-409A-AAD2-3BFAC3CD74EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECCF7D71-3082-409A-AAD2-3BFAC3CD74EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECCF7D71-3082-409A-AAD2-3BFAC3CD74EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECCF7D71-3082-409A-AAD2-3BFAC3CD74EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CBD678F-7006-4DD3-BB43-D27CDC9E6A64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CBD678F-7006-4DD3-BB43-D27CDC9E6A64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CBD678F-7006-4DD3-BB43-D27CDC9E6A64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CBD678F-7006-4DD3-BB43-D27CDC9E6A64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98CC8CBC-B9CA-447D-8B04-F572DBE3FB5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98CC8CBC-B9CA-447D-8B04-F572DBE3FB5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98CC8CBC-B9CA-447D-8B04-F572DBE3FB5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98CC8CBC-B9CA-447D-8B04-F572DBE3FB5C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{ECCF7D71-3082-409A-AAD2-3BFAC3CD74EF} = {C79DFA2D-26A2-4C93-8335-764FBC7B9DDE}
+		{8CBD678F-7006-4DD3-BB43-D27CDC9E6A64} = {C79DFA2D-26A2-4C93-8335-764FBC7B9DDE}
+		{98CC8CBC-B9CA-447D-8B04-F572DBE3FB5C} = {C79DFA2D-26A2-4C93-8335-764FBC7B9DDE}
 	EndGlobalSection
 EndGlobal
