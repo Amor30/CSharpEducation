@@ -1,13 +1,11 @@
+using static TicTacToe.GameConstants;
+
 using System;
 
 namespace TicTacToe;
 
 public class TicTacToe
 {
-    const string Circle = "O";
-    const string Cross = "X";
-
-
     public static void StartGame(string firstTurn)
     {
         var isCircleTurn = firstTurn == Circle;
