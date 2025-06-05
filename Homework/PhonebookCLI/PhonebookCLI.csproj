@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\PhonebookManagement\PhonebookManagement.csproj" />
+      <ProjectReference Include="..\AbonentLibrary\AbonentLibrary.csproj" />
     </ItemGroup>
 
 </Project>

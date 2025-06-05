@@ -35,6 +35,9 @@ x64/
 *.svclog
 *.scc
 
+# Visual Studio cache/config
+.vs/
+
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
