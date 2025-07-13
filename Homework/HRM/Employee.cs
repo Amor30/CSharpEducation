@@ -1,27 +1,33 @@
-namespace HRM
+namespace HRM;
+
+public abstract class Employee
 {
-    public class Employee
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public double Salary { get; set; }
-        public DateTime HireDate { get; set; }
+  #region Свойства
 
-        public Employee() { }
+  /// <summary>
+  /// Name of the employee
+  /// </summary>
+  public string Name { get; set; }
 
-        public Employee(int id, string name, double salary)
-        {
-            Id = id;
-            Name = name;
-            Salary = salary;
-            HireDate = DateTime.Now;
-        }
+  /// <summary>
+  /// Base salary of the employee
+  /// </summary>
+  public decimal Salary { get; set; }
 
-        public double CalculateSalary()
-        {
-            var experience = DateTime.Now.Year - HireDate.Year;
-            var bonus = experience > 0 ? (Salary * 0.2 * experience) : 0;
-            return Salary + bonus;
-        }
-    }
+  /// <summary>
+  /// Unique identifier of the employee
+  /// </summary>
+  public int Id { get; set; }
+
+  #endregion
+
+  #region Методы
+
+  /// <summary>
+  /// Calculates the salary for the employee
+  /// </summary>
+  /// <returns>The calculated salary</returns>
+  public abstract decimal CalculateSalary();
+
+  #endregion
 }
