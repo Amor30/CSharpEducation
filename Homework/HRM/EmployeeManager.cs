@@ -93,7 +93,7 @@ public class EmployeeManager : IEmployeeManager<Employee>
       }
       else
       {
-        throw new EmployeeNotFoundException("\nEmployee with specified Id not found");
+        throw new EmployeeNotFoundException("Employee with specified Id not found");
       }
     }
     catch (Exception e)
