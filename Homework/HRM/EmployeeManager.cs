@@ -5,12 +5,12 @@ public class EmployeeManager : IEmployeeManager<Employee>
   #region Fields
   
   /// <summary>
-  /// List of employees managed
+  /// Список сотрудников
   /// </summary>
   private List<Employee> employees;
   
   /// <summary>
-  /// Next available Id for a new employee
+  /// Следующий свободный Id для сотрудника
   /// </summary>
   private int nextId;
 
@@ -19,7 +19,7 @@ public class EmployeeManager : IEmployeeManager<Employee>
   #region Constructors
   
   /// <summary>
-  /// Initializes a new instance of the EmployeeManager 
+  /// Инициализация списка и следующего Id
   /// </summary>
   public EmployeeManager()
   {
@@ -32,18 +32,18 @@ public class EmployeeManager : IEmployeeManager<Employee>
   #region Methods
   
   /// <summary>
-  /// Adds a new employee
+  /// Добавление нового сотрудника
   /// </summary>
-  /// <param name="employee">The employee to add</param>
-  /// <exception cref="ArgumentNullException">Throw when the employee is null</exception>
-  /// <exception cref="EmployeeAlreadyExistsException">Throw when an employee with the same id already  exists</exception>
+  /// <param name="employee">Сотрудник которого нужно добавить</param>
+  /// <exception cref="ArgumentNullException">Вызывается, когда сотрудник равен null</exception>
+  /// <exception cref="EmployeeAlreadyExistsException">Вызывается, когда сотрудник с таким Id уже существует</exception>
   public void Add(Employee employee)
   {
     try
     {
-      if (employee == null) throw new ArgumentNullException(nameof(employee));
+      if (employee is null) throw new ArgumentNullException(nameof(employee));
       if (employees.Any(e => e.Id == employee.Id))
-        throw new EmployeeAlreadyExistsException("Сотрудник с таким Id уже существует");
+        throw new EmployeeAlreadyExistsException("An employee with this Id already exists.");
       
       employee.Id = nextId++;
       employees.Add(employee);
@@ -57,10 +57,10 @@ public class EmployeeManager : IEmployeeManager<Employee>
   }
 
   /// <summary>
-  /// Return an employee by their Id
+  /// Возвращает сотрудника по его Id
   /// </summary>
-  /// <param name="id">The Id of the employee to return</param>
-  /// <returns>Throw when an unexpected error occurs</returns>
+  /// <param name="id">Id сотрудника, которого нужно вернуть</param>
+  /// <returns>Вызывается при возникновении непредвиденный ошибки</returns>
   public Employee Get(int id)
   {
     try
@@ -75,25 +75,25 @@ public class EmployeeManager : IEmployeeManager<Employee>
   }
 
   /// <summary>
-  /// Updates an existing employee's information
+  /// Обновляет информацию сотрудника
   /// </summary>
-  /// <param name="employee">The employee with updated information</param>
-  /// <exception cref="ArgumentNullException">Throw when the employee is null</exception>
-  /// <exception cref="EmployeeNotFoundException">Throw when the employee with specified Id is not found</exception>
+  /// <param name="employee">Сотрудник с обновленной информацией</param>
+  /// <exception cref="ArgumentNullException">Вызывается, когда сотрудник равен null</exception>
+  /// <exception cref="EmployeeNotFoundException">Вызывается, когда сотрудник с таким Id не найден</exception>
   public void Update(Employee employee)
   {
     try
     {
-      if (employee == null) throw new ArgumentNullException(nameof(employee));
+      if (employee is null) throw new ArgumentNullException(nameof(employee));
       var existing = employees.FirstOrDefault(e => e.Id == employee.Id);
-      if (existing != null)
+      if (existing is not null)
       {
         employees.Remove(existing);
         employees.Add(employee);
       }
       else
       {
-        throw new EmployeeNotFoundException("Сотрудник с указанным Id не найден");
+        throw new EmployeeNotFoundException("\nEmployee with specified Id not found");
       }
     }
     catch (Exception e)
@@ -104,22 +104,22 @@ public class EmployeeManager : IEmployeeManager<Employee>
   }
 
   /// <summary>
-  /// Deletes an employee by their Id
+  /// Удаляет сотрудника по его Id
   /// </summary>
-  /// <param name="id">The Id of the employee to delete</param>
-  /// <exception cref="EmployeeNotFoundException">Theow when the employee with the specified Id is not found</exception>
+  /// <param name="id">Id сотрудника для удаления</param>
+  /// <exception cref="EmployeeNotFoundException">Вызывается, когда сотрудник с таким Id не найден</exception>
   public void Delete(int id)
   {
     try
     {
       var employee = employees.FirstOrDefault(e => e.Id == id);
-      if (employee != null)
+      if (employee is not null)
       {
         employees.Remove(employee);
       }
       else
       {
-        throw new EmployeeNotFoundException("Сотрудник с указанным Id не найден");
+        throw new EmployeeNotFoundException("Employee with specified Id not found");
       }
     }
     catch (Exception e)

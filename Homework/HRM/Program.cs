@@ -3,14 +3,14 @@
 namespace HRM
 {
   /// <summary>
-  /// Main program class for managing employees through a console interface
+  /// Основной класс программы для управления сотрудниками через консольное приложение
   /// </summary>
   public class Program
   {
     #region Main Method
 
     /// <summary>
-    /// Entry point of the program
+    /// Точка входа в программу
     /// </summary>
     public static void Main()
     {
@@ -22,7 +22,7 @@ namespace HRM
         {
           DisplayMenu();
           if (!int.TryParse(Console.ReadLine(), out int choice))
-            throw new InvalidInputException("Неверный ввод. Введите число от 1 до 5");
+            throw new InvalidInputException("Invalid input. Please enter a number between 1 and 5");
 
           switch (choice)
           {
@@ -41,24 +41,24 @@ namespace HRM
             case 5:
               return;
             default:
-              throw new InvalidInputException("Неверный ввод. Введите число от 1 до 5");
+              throw new InvalidInputException("Invalid input. Please enter a number between 1 and 5");
           }
         }
         catch (EmployeeAlreadyExistsException ex)
         {
-          Console.WriteLine($"Ошибка: {ex.Message}");
+          Console.WriteLine($"Error: {ex.Message}");
         }
         catch (EmployeeNotFoundException ex)
         {
-          Console.WriteLine($"Ошибка: {ex.Message}");
+          Console.WriteLine($"Error: {ex.Message}");
         }
         catch (InvalidInputException ex)
         {
-          Console.WriteLine($"Ошибка: {ex.Message}");
+          Console.WriteLine($"Error: {ex.Message}");
         }
         catch (Exception ex)
         {
-          Console.WriteLine($"Непредвиденная ошибка: {ex.Message}");
+          Console.WriteLine($"Unexpected error: {ex.Message}");
         }
       }
     }
@@ -68,7 +68,7 @@ namespace HRM
     #region Helper methods
 
     /// <summary>
-    /// Displays the employee management menu to the console
+    /// Выводит меню управления сотрудниками на консоль
     /// </summary>
     private static void DisplayMenu()
     {
@@ -82,10 +82,10 @@ namespace HRM
     }
 
     /// <summary>
-    /// Handles the process of adding a new employee
+    /// Управляет процессом добавления нового сотрудника
     /// </summary>
-    /// <param name="manager">The employee manager instance</param>
-    /// <exception cref="InvalidInputException">Thrown when input is invalid</exception>
+    /// <param name="manager">Экземпляр менеджера сотрудников</param>
+    /// <exception cref="InvalidInputException">Вызывается, если входные данные некорректны</exception>
     private static void HandleAddEmployee(EmployeeManager manager)
     {
       Console.Write("Введите имя: ");
@@ -96,24 +96,27 @@ namespace HRM
       Console.WriteLine("2. Неполный рабочий день");
       Console.Write("Выберите тип (1 или 2): ");
       if (!int.TryParse(Console.ReadLine(), out int typeChoice) || (typeChoice != 1 && typeChoice != 2))
-        throw new InvalidInputException("Неверный выбор типа. Введите 1 или 2");
+        throw new InvalidInputException("Invalid type selection. Please enter 1 or 2");
 
       Employee employee;
       if (typeChoice == 1)
       {
         Console.Write("Введите базовую зарплату: ");
         if (!decimal.TryParse(Console.ReadLine(), out decimal baseSalary) || baseSalary < 0)
-          throw new InvalidInputException("Неверный формат зарплаты");
+          throw new InvalidInputException("Incorrect salary format");
+        
         employee = new FullTimeEmployee { Name = name, Salary = baseSalary };
       }
       else
       {
         Console.Write("Введите ставку за час: ");
         if (!decimal.TryParse(Console.ReadLine(), out decimal hourlyRate) || hourlyRate < 0)
-          throw new InvalidInputException("Ставка за час должна быть не отрицательной");
+          throw new InvalidInputException("The hourly rate must not be negative.");
+        
         Console.Write("Введите количество часов: ");
         if (!int.TryParse(Console.ReadLine(), out int hoursWorked) || hoursWorked < 0)
-          throw new InvalidInputException("Количество часов должно быть не отрицательным");
+          throw new InvalidInputException("The hours worked must not be negative");
+        
         employee = new PartTimeEmployee { Name = name, HourlyRate = hourlyRate, HoursWorked = hoursWorked };
       }
 
@@ -121,19 +124,19 @@ namespace HRM
     }
 
     /// <summary>
-    /// Handles the process of updating an existing employee's info
+    /// Управляет процессом обновления информации о существующем сотруднике
     /// </summary>
-    /// <param name="manager">The employee manager instance</param>
-    /// <exception cref="InvalidInputException">Thrown when input is invalid</exception>
-    /// <exception cref="EmployeeNotFoundException">Thrown when the employee is not found</exception>
+    /// <param name="manager">Экземпляр менеджера сотрудников</param>
+    /// <exception cref="InvalidInputException">Вызывается, когда входные данные некорректны</exception>
+    /// <exception cref="EmployeeNotFoundException">Вызывается, когда сотрудник не найден по его Id</exception>
     private static void HandleUpdateEmployee(EmployeeManager manager)
     {
       Console.Write("Введите Id сотрудника: ");
       if (!int.TryParse(Console.ReadLine(), out int id))
-        throw new InvalidInputException("Неверный формат Id");
+        throw new InvalidInputException("Invalid Id format");
 
       Employee existing = manager.Get(id);
-      if (existing != null)
+      if (existing is not null)
       {
         Console.Write("Введите новое имя (или нажмите Enter, чтобы пропустить): ");
         string newName = Console.ReadLine();
@@ -149,6 +152,7 @@ namespace HRM
           Console.Write("Введите новую ставку за час (или 0, чтобы пропустить): ");
           if (decimal.TryParse(Console.ReadLine(), out decimal newHourlyRate) && newHourlyRate >= 0)
             partTime.HourlyRate = newHourlyRate;
+          
           Console.Write("Введите новое количество часов (или 0, чтобы пропустить): ");
           if (int.TryParse(Console.ReadLine(), out int newHoursWorked) && newHoursWorked >= 0)
             partTime.HoursWorked = newHoursWorked;
@@ -159,55 +163,55 @@ namespace HRM
       }
       else
       {
-        throw new EmployeeNotFoundException("Сотрудник с указанным Id не найден");
+        throw new EmployeeNotFoundException("Employee with specified Id not found");
       }
     }
 
     /// <summary>
-    /// Handles the process of return and print an employee's info
+    /// Управляет процессом возврата и выводит в консоль информацию о сотруднике
     /// </summary>
-    /// <param name="manager">The employee manager instance</param>
-    /// <exception cref="InvalidInputException">Thrown when input is invalid</exception>
-    /// <exception cref="EmployeeNotFoundException">Thrown when the employee is not found</exception>
+    /// <param name="manager">Экземпляр менеджера сотрудников</param>
+    /// <exception cref="InvalidInputException">Вызывается, когда входные данные некорректны</exception>
+    /// <exception cref="EmployeeNotFoundException">Вызывается, когда сотрудник с указанным Id не найден</exception>
     private static void HandleGetEmployee(EmployeeManager manager)
     {
       Console.Write("Введите Id сотрудника: ");
       if (!int.TryParse(Console.ReadLine(), out int infoId))
-        throw new InvalidInputException("Неверный формат Id");
+        throw new InvalidInputException("Invalid Id format");
 
       Employee employee = manager.Get(infoId);
-      if (employee != null)
+      if (employee is not null)
       {
         decimal salary = employee.CalculateSalary();
         Console.WriteLine($"Id: {employee.Id}, Name: {employee.Name}, Salary: {salary:F2}");
       }
       else
       {
-        throw new EmployeeNotFoundException("Сотрудник с указанным Id не найден");
+        throw new EmployeeNotFoundException("Employee with specified Id not found");
       }
     }
 
     /// <summary>
-    /// Handles the process of deleting an employee
+    /// Управляет процессом удаления сотрудника
     /// </summary>
-    /// <param name="manager">The employee manager instance</param>
-    /// <exception cref="InvalidInputException">Thrown when input is invalid</exception>
-    /// <exception cref="EmployeeNotFoundException">Thrown when the employee is not found</exception>
+    /// <param name="manager">Экземпляр менеджера сотрудников</param>
+    /// <exception cref="InvalidInputException">Вызывается, когда входные данные некорректны</exception>
+    /// <exception cref="EmployeeNotFoundException">Вызывается, когда сотрудник с указанным Id не найден</exception>
     private static void HandleDeleteEmployee(EmployeeManager manager)
     {
       Console.Write("Введите Id сотрудника для удаления: ");
       if (!int.TryParse(Console.ReadLine(), out int deleteId))
-        throw new InvalidInputException("Неверный формат Id");
+        throw new InvalidInputException("Invalid Id format");
 
       Employee employee = manager.Get(deleteId);
-      if (employee != null)
+      if (employee is not null)
       {
         manager.Delete(deleteId);
         Console.WriteLine("Сотрудник удален");
       }
       else
       {
-        throw new EmployeeNotFoundException("Сотрудник с указанным Id не найден");
+        throw new EmployeeNotFoundException("Employee with specified Id not found");
       }
     }
 

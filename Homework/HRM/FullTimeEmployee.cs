@@ -3,9 +3,9 @@ namespace HRM;
 public class FullTimeEmployee : Employee
 {
   /// <summary>
-  /// Calculates the salary for a full-time employee
+  /// Расчет зарплата для сотрудника, который работает полный день
   /// </summary>
-  /// <returns>The base salary of the employee</returns>
+  /// <returns>Зарплату сотрудника</returns>
   public override decimal CalculateSalary()
   {
     return this.Salary;

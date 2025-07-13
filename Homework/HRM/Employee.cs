@@ -5,17 +5,17 @@ public abstract class Employee
   #region Свойства
 
   /// <summary>
-  /// Name of the employee
+  /// Имя работника
   /// </summary>
   public string Name { get; set; }
 
   /// <summary>
-  /// Base salary of the employee
+  /// Зарплата сотрудника
   /// </summary>
   public decimal Salary { get; set; }
 
   /// <summary>
-  /// Unique identifier of the employee
+  /// Уникальный идентификатор сотрудника
   /// </summary>
   public int Id { get; set; }
 
@@ -24,9 +24,9 @@ public abstract class Employee
   #region Методы
 
   /// <summary>
-  /// Calculates the salary for the employee
+  /// Расчет зарплаты для сотрудника
   /// </summary>
-  /// <returns>The calculated salary</returns>
+  /// <returns>Зарплату сотрудника</returns>
   public abstract decimal CalculateSalary();
 
   #endregion

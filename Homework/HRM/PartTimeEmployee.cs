@@ -3,29 +3,30 @@ namespace HRM;
 public class PartTimeEmployee : Employee
 {
   /// <summary>
-  /// Hourly rate for the part-time employee
+  /// Ставка в час сотрудника, который работает неполный рабочий день
   /// </summary>
   public decimal HourlyRate { get; set; }
 
   /// <summary>
-  /// Number of hours worked by the part-time employee
+  /// Количество часов, которые работает сотрудник
   /// </summary>
   public int HoursWorked { get; set; }
 
   /// <summary>
-  /// Hide unused field
+  /// Скрытие неиспользуемого поля Salary
   /// </summary>
   private decimal Salary { get; set; }
 
   /// <summary>
-  /// Calculate the salary for the part-time employee based on hourly rate and hours worked
+  /// Расчет зарплата для сотрудника, который работает неполный рабочий день, на основе почасовой ставки и отработанных часов
   /// </summary>
-  /// <returns>The calculated salary</returns>
-  /// <exception cref="ArgumentException">Throw when hourly rate or hours worked is negative</exception>
+  /// <returns>Зарплату сотрудника</returns>
+  /// <exception cref="ArgumentException">Вызывается когда почасовая ставка или отработанные часы меньше нуля</exception>
   public override decimal CalculateSalary()
   {
     if (HourlyRate < 0 || HoursWorked < 0)
-      throw new ArgumentException("Ставка в час и количество часов должны быть больше 0");
+      throw new ArgumentException("Hourly rate and hours worked must be greater than 0");
+    
     return HourlyRate * HoursWorked;
   }
 }
