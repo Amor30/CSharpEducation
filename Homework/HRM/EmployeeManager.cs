@@ -43,7 +43,7 @@ public class EmployeeManager : IEmployeeManager<Employee>
     {
       if (employee == null) throw new ArgumentNullException(nameof(employee));
       if (employees.Any(e => e.Id == employee.Id))
-        throw new EmployeeAlreadyExistsException("Сотрудник с таким ID уже существует");
+        throw new EmployeeAlreadyExistsException("Сотрудник с таким Id уже существует");
       
       employee.Id = nextId++;
       employees.Add(employee);
@@ -93,7 +93,7 @@ public class EmployeeManager : IEmployeeManager<Employee>
       }
       else
       {
-        throw new EmployeeNotFoundException("Сотрудник с указанным ID не найден");
+        throw new EmployeeNotFoundException("Сотрудник с указанным Id не найден");
       }
     }
     catch (Exception e)
@@ -119,7 +119,7 @@ public class EmployeeManager : IEmployeeManager<Employee>
       }
       else
       {
-        throw new EmployeeNotFoundException("Сотрудник с указанным ID не найден");
+        throw new EmployeeNotFoundException("Сотрудник с указанным Id не найден");
       }
     }
     catch (Exception e)
